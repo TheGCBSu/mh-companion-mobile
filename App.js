@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import MonsterNavigator from "./navigators/MonsterNavigator";
+import ArmorNavigator from "./navigators/ArmorNavigator";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Styles, Colors } from "./theme";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: Colors.surface },
+          headerTintColor: Colors.accent,
+          tabBarStyle: { backgroundColor: Colors.surface },
+          tabBarActiveTintColor: Colors.accent,
+          tabBarInactiveTintColor: Colors.muted,
+        }}
+      >
+        <Tab.Screen
+          name="Monsters"
+          component={MonsterNavigator}
+          options={{ headerShown: true }}
+        />
+        <Tab.Screen
+          name="Armor"
+          component={ArmorNavigator}
+          options={{ headerShown: true }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
